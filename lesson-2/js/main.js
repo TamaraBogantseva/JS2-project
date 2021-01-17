@@ -1,6 +1,6 @@
 
 class Product {
-    constructor(product, img = 'https://placehold.it/100x50') {
+    constructor(product, img = 'https://placehold.it/100x100') {
         let { title, price = 0, id } = product;
         this.title = title;
         this.img = img;
@@ -28,9 +28,16 @@ class ProductsList {
         this.container = document.querySelector(container);
         this._fetchData();
         this._render();
+        this.calculateSum();
     }
 
-    init() {}
+    calculateSum() {
+        let sum = 0;
+        this.products.forEach(product => {
+            sum += product.price
+        });
+        console.log(sum);
+    }
 
     _fetchData() {
         this.data = [
@@ -52,52 +59,31 @@ class ProductsList {
 
 const list = new ProductsList();
 
+
 class Cart {
     constructor() {
-        // name - свойство в котором лежит имя
+        // products = [] - массив товаров которые лежат в корзине
+        // sum - свойство в котором лежит общая стоимость товаров в корзине
     }
 
-    // some() - метод для подсчета стоимости корзины
+    // countCart() - метод для подсчета стоимости корзины
+    // resetCart() - метод для удаления всех товаров из корзины
+    // render() - метод для отображения корзины
+
+}
+
+class CartElement {
+    constructor() {
+        // id - свойство в котором лежит id товаров
+        // name - свойство в котором лежит наименование товара
+        // price - свойство в котором лежит цена товара
+        // quantity - свойство в котором лежит кол-во товаров в корзине
+    }
+
+    // addMore() - метод для увеличения количества 
+    // deleteProduct() - метод для удаления товара из корзины
+    // render() - метод для отображения товара в корзине
 }
 
 
-// const products = [
-//     { id: 1, title: 'Notebook', price: 2000 },
-//     { id: 2, title: 'Keyboard', price: 200 },
-//     { id: 3, title: 'Mouse', price: 100 },
-//     { id: 4, title: 'Gamepad' },
-// ];
-//
-// const renderProduct = (product, img = 'https://placehold.it/100x50') => {
-//     return `<div class="product-item">
-//                  <img src="${img}" alt="${product.title}">
-//                  <div class="desc">
-//                      <h3>${product.title}</h3>
-//                      <p>${product.price}</p>
-//                      <button class="buy-btn">Купить</button>
-//                  </div>
-//              </div>`
-// };
 
-// const renderProduct = (product, img = 'https://placehold.it/100x50') => {
-//     const { title, price = 10 } = product;
-//     return `<div class="product-item">
-//                  <img src="${img}" alt="${title}">
-//                  <div class="desc">
-//                      <h3>${title}</h3>
-//                      <p>${price}</p>
-//                      <button class="buy-btn">Купить</button>
-//                  </div>
-//              </div>`
-// };
-
-// const renderPage = productsList => {
-//     // document.querySelector(`.products`).innerHTML = productsList.map(product => renderProduct(product)).join('');
-//     const element = document.querySelector(`.products`);
-//     let strElements = '';
-//     for (let product of productsList) {
-//         element.insertAdjacentHTML('beforeend', renderProduct(product));
-//     }
-// };
-//
-// renderPage(products);
