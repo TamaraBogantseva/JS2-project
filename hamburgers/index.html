@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form name="burger">
+
+        <fieldset>
+
+            <legend>Выбирете размер гамбургера</legend>
+            <input type="radio" id="bigBurger" name="burgerSize" value="big">
+            <label for="bigBurger">
+                <img src="https://i.pinimg.com/originals/b7/46/e1/b746e1f3704bdb0dd2ddeebb51daf0e3.png" alt="bh"
+                    width="70px" height="100px">
+                Большой (100 рублей, 40 калорий)
+            </label>
+
+            <input type="radio" id="smallBurger" name="burgerSize" value="small">
+            <label for="smallBurger">
+                <img src="https://pizzazzerie.com/wp-content/uploads/2015/08/party-food-mini-cheeseburgers-pizzazzerie-6.jpg"
+                    alt="sh" width="100px" height="100px">
+                Маленький (50 рублей, 20 калорий)</label>
+        </fieldset>
+
+
+        <fieldset>
+
+            <legend>Выбирете начинку</legend>
+            <input type="radio" id="cheeseFill" name="filling" value="cheese">
+            <label for="cheeseFill">
+                <img src="https://www.ecosystemmarketplace.com/wp-content/uploads/2019/11/Swiss-Cheese.jpg" alt="cheese"
+                    width="100px" height="100px">
+                Сыр (+10 рублей, +20 калорий)</label>
+            <input type="radio" id="salatFill" name="filling" value="salat">
+            <label for="salatFill">
+                <img src="https://cdn2.stylecraze.com/wp-content/uploads/2013/07/16-Best-Benefits-Of-Lettuce-For-Skin-Hair-And-Health.jpg"
+                    alt="salad" width="100px" height="100px">
+                Салат (+20 рублей, +5 калорий)</label>
+            <input type="radio" id="potatoFill" name="filling" value="potato">
+            <label for="potatoFill">
+                <img src="https://healthyfitnessmeals.com/wp-content/uploads/2020/05/instagram-In-Stream_Square___Baked-potato-wedges-4.jpg"
+                    alt="potato" width="100px" height="100px">
+                Картофель (+15 рублей, +10 калорий)</label>
+
+        </fieldset>
+
+
+
+        <fieldset>
+
+            <legend>Выбирете топпинг</legend>
+            <input type="checkbox" id="spice" name="topping" value="spice">
+            <label for="spiece">
+                <img src="https://sweetpeasandsaffron.com/wp-content/uploads/2017/12/Moroccan-Spice-Blend-text-500x375.jpg"
+                    alt="spice" width="100px" height="70px">
+                Посыпать приправой (+15 рублей, +0 калорий)</label>
+            <input type="checkbox" id="mayoTopping" name="topping" value="mayo">
+            <label for="mayoTopping">
+                <img src="https://images.heb.com/is/image/HEBGrocery/001098244" alt="mayo" width="100px" height="100px">
+                Полить майонезом (+20 рублей, +5 калорий)</label>
+
+        </fieldset>
+
+    </form>
+
+    <button id="btn">Заказать</button>
+
+    <div id="result"></div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
