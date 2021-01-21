@@ -1,20 +1,37 @@
 
 const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 
-let getData = (url, cb) => {
-    let xhr = new XMLHttpRequest();
-    // window.ActiveXObject -> new ActiveXObject();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status !== 200) {
-                console.log('error');
-            } else {
-                cb(xhr.responseText);
+// let getData = (url, cb) => {
+//     let xhr = new XMLHttpRequest();
+//     // window.ActiveXObject -> new ActiveXObject();
+//     xhr.open('GET', url, true);
+//     xhr.onreadystatechange = () => {
+//         if (xhr.readyState === 4) {
+//             if (xhr.status !== 200) {
+//                 console.log('error');
+//             } else {
+//                 cb(xhr.responseText);
+//             }
+//         }
+//     }
+// };
+
+let getData = (url) => {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status !== 200) {
+                    console.log('error');
+                    reject('Error');
+                } else {
+                    resolve(xhr.responseText);
+                }
             }
         }
-    }
-};
+    })
+}
 
 class Product {
     constructor(product, img = 'https://placehold.it/100x100') {
@@ -33,7 +50,7 @@ class Product {
                   <div class="desc">
                       <h3>${this.title}</h3>
                       <p>${this.price}</p>
-                      <button class="buy-btn">Купить</button>
+                      <button class="buy-btn" type="button">Купить</button>
                   </div>
               </div>`
     }
@@ -48,8 +65,6 @@ class ProductsList {
         this._fetchData()
             .then(() => this._render());
     }
-
-    init() { }
 
     calcSum() {
         return this.products.reduce((accum, item) => accum += item.price, 0);
@@ -79,30 +94,48 @@ class ProductsList {
 }
 
 const list = new ProductsList();
+
 console.log(list.calcSum());
 
 class Cart {
-    constructor() {
-        // products = [] - массив товаров которые лежат в корзине
-        // sum - свойство в котором лежит общая стоимость товаров в корзине
+    constructor() { //нужен ли нам тут вообще конструктор, если мы туда ничего не передаем? 
+        this.cartProducts = []; //массив товаров которые лежат в корзине
+        this.sum = 0; // sum - свойство в котором лежит общая стоимость товаров в корзине
     }
 
-    // countCart() - метод для подсчета стоимости корзины
+    //метод для добавления товара 
+    addProduct(cartProduct) {
+        //добавить проверку на наличие в корзине (если есть, то просто увеличиваем количество, если нет, то, соответственно, добавляем товар)
+        let selectedProduct = new CartElement(cartProduct); //тут в cartProduct надо передать выбранный товар
+        this.cartProducts.push(selectedProduct);
+    }
+
+    // метод для подсчета стоимости корзины
+    countCart() {
+        return this.cartProducts.reduce((accum, item) => accum += item.price, 0);
+    }
+
     // resetCart() - метод для удаления всех товаров из корзины
-    // addProduct() - метод для увеличения количества 
     // deleteProduct() - метод для удаления товара из корзины
     // render() - метод для отображения корзины
 
+
 }
 
+
 class CartElement {
-    constructor() {
-        // id - свойство в котором лежит id товаров
-        // name - свойство в котором лежит наименование товара
-        // price - свойство в котором лежит цена товара
-        // quantity - свойство в котором лежит кол-во товаров в корзине
+    constructor(cartProduct) {
+        let { title, price = 0, id } = cartProduct;
+        this.title = cartProduct.title;
+        this.price = cartProduct.price;
+        this.id = cartProduct.id;
+        this.quantity = 0;
     }
 
+    //увеличиваем количество на 1, будем вызывать при повторном добавлении и нажатии на кнопку + товара в корзине
+    addQuantity() {
+        this.quantity += 1;
+    }
 
     // render() - метод для отображения товара в корзине
 }
