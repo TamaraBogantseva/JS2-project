@@ -16,20 +16,9 @@ const Shop = {
             notFound: 'Нет данных' //или текст лучше в html файл? 
         }
     },
-    computed: { //ничего лучше тут не придумала, если делать через методы, то потом ломается верстка
-        isFoundProduct() {
-            if (this.filtered.length == 0) {
-                return 'search-fail';
-            } else {
-                return 'search-succes'
-            }
-        },
-        isEmptyBasket() {
-            if (this.cartProducts.length == 0) {
-                return 'search-fail'
-            } else {
-                return 'search-succes'
-            }
+    computed: {
+        filterProducts() { //рендерить из этого массива товары? 
+            return this.products.filter(product => new RegExp(this.searchLine, 'i').test(product.product_name));
         }
     },
     methods: {
@@ -63,16 +52,6 @@ const Shop = {
                         }
                     }
                 })
-        },
-        filterProducts() { //рендерить из этого массива товары? 
-            console.log('filter');
-            let regexp = new RegExp(this.searchLine, 'i');
-            if (this.searchLine === '') {
-                this.filtered = this.products;
-            } else {
-                this.filtered = this.products.filter(product => regexp.test(product.product_name));
-            };
-            console.log(this.filtered);
         }
     },
     mounted() {
@@ -94,7 +73,6 @@ const Shop = {
                     this.cartProducts.push(product);
                 }
             });
-        this.filtered = this.products; //кажется, что это какие-то костыли
     }
 }
 

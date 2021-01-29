@@ -15,13 +15,13 @@
             <div class="cart">
                 <form action="#" class="search-form">
                     <input v-model.lazy="searchLine" type="text" class="search-field">
-                    <button @click.prevent="filterProducts" class="btn-search" type="submit">
+                    <button @submit.prevent="filterProducts" class="btn-search" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
                 <button @click="isVisibleCart = !isVisibleCart" class="btn-cart" type="button">Корзина</button>
                 <div v-show="isVisibleCart" class="cart-block">
-                    <div :class="isEmptyBasket">{{ notFound }}</div>
+                    <div v-show="!cartProducts.length">{{ notFound }}</div>
                     <div class="cart-item" v-for="el of cartProducts" :key="el.id_product">
                         <div class="product-bio">
                             <img :src="imgCart" :alt="el.product_name">
@@ -41,8 +41,8 @@
         </header>
         <main>
             <div class="products">
-                <div :class="isFoundProduct">{{ notFound }}</div>
-                <div class="product-item" v-for="el of filtered" :key="el.id_product">
+                <div v-show="!filterProducts.length">{{ notFound }}</div>
+                <div class="product-item" v-for="el of filterProducts" :key="el.id_product">
                     <img :src="imgCatalog" :alt="el.product_name">
                     <div class="desc">
                         <h3>{{ el.product_name }}</h3>
