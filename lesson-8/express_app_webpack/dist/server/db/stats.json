@@ -1,0 +1,47 @@
+[
+    {
+        "time": "February 4th 2021, 8:26:42 pm",
+        "prod_name": "Gamepad",
+        "action": "change"
+    },
+    {
+        "time": "February 4th 2021, 8:26:56 pm",
+        "prod_name": "Keyboard",
+        "action": "change"
+    },
+    {
+        "time": "February 4th 2021, 8:26:56 pm",
+        "prod_name": "Keyboard",
+        "action": "change"
+    },
+    {
+        "time": "February 4th 2021, 8:26:56 pm",
+        "prod_name": "Keyboard",
+        "action": "remove"
+    },
+    {
+        "time": "February 4th 2021, 8:27:04 pm",
+        "prod_name": "Ноутбук",
+        "action": "change"
+    },
+    {
+        "time": "February 4th 2021, 8:27:07 pm",
+        "prod_name": "Keyboard",
+        "action": "add"
+    },
+    {
+        "time": "February 4th 2021, 8:28:45 pm",
+        "prod_name": "Gamepad",
+        "action": "change"
+    },
+    {
+        "time": "February 4th 2021, 9:39:43 pm",
+        "prod_name": "Gamepad",
+        "action": "change"
+    },
+    {
+        "time": "February 4th 2021, 9:40:23 pm",
+        "prod_name": "Ноутбук",
+        "action": "change"
+    }
+]
