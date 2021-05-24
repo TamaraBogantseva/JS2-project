@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form action="#" class="form">
+            <div class="form-left-decoration"></div>
+            <div class="form-right-decoration"></div>
+            <div class="circle"></div>
+            <div class="form-inner">
+                <h3>Write Us</h3>
+                <div class="form-field container__name">
+                    <label for="name__lable">
+                        Name
+                    </label>
+                    <input name="Name" id="name" class="form-input" placeholder="John Smith">
+                    <div class="incorrect-value incorrect-value-name">Имя содержит только буквы.</div>
+                </div>
+                <div class="form-field container__phone">
+                    <label for="phone__lable">
+                        Phone
+                    </label>
+                    <input name="Phone" id="tel" class="form-input" placeholder="+7(000)000-0000">
+                    <div class="incorrect-value incorrect-value-tel">Телефон имеет вид +7(000)000-0000.</div>
+                </div>
+                <div class="form-field container__email">
+                    <label for="email__lable">
+                        Email Address
+                    </label>
+                    <input name="Email_Address" id="email" class="form-input" placeholder="mymail@mail.ru">
+                    <div class="incorrect-value incorrect-value-email">E-mail имеет вид mymail@mail.ru/com, может
+                        содержать . или - </div>
+                </div>
+                <div class="form-field container__text">
+                    <label for="text__lable">
+                        Message
+                    </label>
+                    <textarea rows="5" cols="20" name="Message" placeholder="Your message"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+
+    <script>
+        /*1. Дан большой текст, в котором для оформления прямой речи используются одинарные кавычки. Придумать шаблон, который заменяет одинарные кавычки на двойные.*/
+        /*2. Улучшить шаблон так, чтобы в конструкциях типа aren't одинарная кавычка не заменялась на двойную.*/
+
+        let text = `One: 'Hi Mary.' Two: 'Oh, hi.'
+        One: 'How are you doing?'
+        Two: 'I'm doing alright. How about you?'
+        One: 'Not too bad. The weather is great isn't it?'
+        Two: 'Yes. It's absolutely beautiful today.'
+        One: 'I wish it was like this more frequently.'
+        Two: 'Me too.'
+        One: 'So where are you going now?'
+        Two: 'I'm going to meet a friend of mine at the department store.'
+        One: 'Going to do a little shopping?'
+        Two: 'Yeah, I have to buy some presents for my parents.'
+        One: 'What's the occasion?'
+        Two: 'It's their anniversary.'
+        One: 'That's great. Well, you better get going. You don't want to be late.'
+        Two: 'I'll see you next time.'
+        One: 'Sure. Bye.'`;
+
+
+        console.log(text.replace(/'(?=[A-Z])|'(?![a-z])/g, '"'));
+
+        /*3. *Создать форму обратной связи с полями: Имя, Телефон, E-mail, текст, кнопка Отправить. При нажатии на кнопку
+    Отправить произвести валидацию полей следующим образом:
+    a. Имя содержит только буквы.
+    b. Телефон имеет вид +7(000)000-0000.
+    c. E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.
+    d. Текст произвольный.
+    e. Если одно из полей не прошло валидацию, необходимо выделить это поле красной рамкой и сообщить пользователю об
+    ошибке.*/
+
+        // let btn = ;
+        let telSelector = document.querySelector('#tel');
+        let emailSelector = document.querySelector('#email');
+        let nameSelector = document.querySelector('#name');
+        let namePattern = /^[a-z\s]+$/ig;
+        let telPattern = /^\+(\d{1})\((\d{3})\)(\d{3})-(\d{4})/;
+        let mailPattern = /^[a-z\.\-]+@[a-z]{4,5}\.ru|com$/;
+
+        let valueCheck = (pattern, subject, id) => {
+            if (pattern.test(subject.value)) {
+            } else {
+                document.querySelector(`#${id}`).classList.add('red');
+                document.querySelector(`.incorrect-value-${id}`).style.display = 'block';
+            }
+        };
+
+
+        document.querySelector('.form').addEventListener('submit', e => {
+            e.preventDefault();
+            valueCheck(namePattern, nameSelector, 'name');
+            valueCheck(telPattern, telSelector, 'tel');
+            valueCheck(mailPattern, emailSelector, 'email');
+        });
+
+
+    </script>
+</body>
+
+</html>
